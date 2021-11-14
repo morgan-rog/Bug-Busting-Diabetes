@@ -1,5 +1,3 @@
-from pathlib import Path
-import base64
 import time
 
 import streamlit as st
