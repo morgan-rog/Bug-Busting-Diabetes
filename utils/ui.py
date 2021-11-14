@@ -11,10 +11,15 @@ def introduction():
         """
         This is a place where you can experiment with different Neural Network models on
         the Pima Indians Diabetes Dataset from Kaggle.
+
+        [The Pima Indians Diabetes Dataset](https://www.kaggle.com/uciml/pima-indians-diabetes-database) is
+        originally from the National Institute of Diabetes and Kidney Diseases. The objective of the dataset
+        is to diagnostically predict whether or not a patient has diabetes.
         
         """
 
     )
+
 
 
 def model_selector():

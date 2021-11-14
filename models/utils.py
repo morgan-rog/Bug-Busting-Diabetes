@@ -12,6 +12,6 @@ model_infos = {
 }
 
 model_urls = {
-    "Morgan's model": "https://colab.research.google.com/drive/1Lizd4yhYgtrL0XHH_Ck_6GTwC7RY-oX3#scrollTo=3OlWxHvDcYZS",
+    "Morgan's model": "https://colab.research.google.com/drive/1Lizd4yhYgtrL0XHH_Ck_6GTwC7RY-oX3",
     "Simple Neural Network": "https://www.kaggle.com/kredy10/simple-neural-network-for-diabetes-prediction"
 }

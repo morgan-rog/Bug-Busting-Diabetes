@@ -62,14 +62,18 @@ def get_model_url(model_type):
     return text
 
 
+def get_model_accuracy(model, X_test, y_test):
+    scores = model.evaluate(X_test, y_test, verbose=0)
+    accuracy = "Accuracy: %.2f%%" % (scores[1]*100)
+    return accuracy
+
+
 def plot_accuracy(model, history):
     acc_line = history.history['accuracy']
-    val_acc_line = history.history['val_accuracy']
 
     plt.plot(acc_line)
-    plt.plot(val_acc_line)
     plt.title('Model Training and Validation Accuracy')
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
+    plt.legend(['train'], loc='upper left')
     return plt
