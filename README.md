@@ -1,5 +1,5 @@
 # bugbustingdiabetes
-## Check out the app ---> click [here](google.com)
+## Check out the app ---> click [here](https://share.streamlit.io/morgan-rog/bugbustingdiabetes/main/app.py)
 ### Inspiration for [streamlit](https://streamlit.io/) app layout from [playground](https://github.com/ahmedbesbes/playground/tree/d0617ea8f5f9782583104b6987b813c5163b0d38) by Ahmed Besbes
 
 ```
