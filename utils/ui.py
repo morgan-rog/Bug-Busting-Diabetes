@@ -1,7 +1,7 @@
 import numpy as np
 import streamlit as st
 
-from models.Morgan import mr_param_selector
+from models.BugBustersNN import bbnn_param_selector
 from models.SimpleNeuralNetwork import snn_param_selector
 from models.KNN import knn_param_selector
 from models.SVM import svm_param_selector
@@ -34,15 +34,15 @@ def model_selector():
         model_type = st.selectbox(
             "Choose a model",
             (
-                "Morgan's model",
+                "Bug Buster's Neural Network",
                 "Simple Neural Network",
                 "KNN",
                 "SVM",
             ),
         )
 
-        if model_type == "Morgan's model":
-            model = mr_param_selector()
+        if model_type == "Bug Buster's Neural Network":
+            model = bbnn_param_selector()
 
         if model_type == "Simple Neural Network":
             model = snn_param_selector()

@@ -3,7 +3,7 @@ from keras.models import Model, Sequential, load_model
 from keras.layers import Input, BatchNormalization
 from keras.layers.core import Dense, Activation
 
-def mr_param_selector():
+def bbnn_param_selector():
     inputs = Input(name='inputs', shape=[8,])
     layer = Dense(128)(inputs)
     layer = Activation('relu')(layer)

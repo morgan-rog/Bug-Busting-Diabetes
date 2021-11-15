@@ -63,7 +63,7 @@ def get_ML_model_summary(model, X_test, y_test):
     prediction = model.predict(X_test)
     class_report = classification_report(y_test, prediction, output_dict=True)
     summary = "Classification Report:\n\n"
-    summary +=   "precision "   + "recall "   + "f1-score "   + "support\n\n"
+    summary +=   "precision " + "recall " + "f1-score " + "support\n\n"
     for label_dict in class_report:
         if label_dict == "accuracy":
             continue
@@ -77,15 +77,27 @@ def get_ML_model_summary(model, X_test, y_test):
     return summary
 
 
-def get_NN_model_accuracy(model, X_test, y_test):
+def get_NN_model_test_accuracy(model, X_test, y_test):
     scores = model.evaluate(X_test, y_test, verbose=0)
-    accuracy = "Accuracy: %.2f%%" % (scores[1]*100)
+    accuracy = "Testing Accuracy: %.2f%%" % (scores[1]*100)
     return accuracy
 
 
-def get_ML_model_accuracy(model, X_test, y_test):
+def get_NN_model_train_accuracy(model, X_train, y_train):
+    scores = model.evaluate(X_train, y_train, verbose=0)
+    accuracy = "Training Accuracy: %.2f%%" % (scores[1]*100)
+    return accuracy
+
+
+def get_ML_model_test_accuracy(model, X_test, y_test):
     scores = round(model.score(X_test, y_test)*100, 2)
-    accuracy = f"Accuracy: {scores}%"
+    accuracy = f"Testing Accuracy: {scores}%"
+    return accuracy
+
+
+def get_ML_model_train_accuracy(model, X_train, y_train):
+    scores = round(model.score(X_train, y_train)*100, 2)
+    accuracy = f"Training Accuracy: {scores}%"
     return accuracy
 
 
