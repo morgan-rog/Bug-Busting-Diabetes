@@ -17,11 +17,6 @@ from models.utils import model_infos, model_urls
 @st.cache(suppress_st_warning=True, allow_output_mutation=True, show_spinner=True)
 def generate_data():
     data = pd.read_csv('diabetes_data.csv')
-    data.SkinThickness.replace(0, data.SkinThickness.median(), inplace=True)
-    data.Insulin.replace(0, data.Insulin.median(), inplace=True)
-    data.Glucose.replace(0, data.Glucose.median(), inplace=True)
-    data.BloodPressure.replace(0, data.BloodPressure.median(), inplace=True)
-    data.BMI.replace(0, data.BMI.median(), inplace=True)
     
     X = data.drop('Outcome', axis=1).values
     y = data.Outcome.values
