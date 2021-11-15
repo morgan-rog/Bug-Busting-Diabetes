@@ -3,6 +3,7 @@ import time
 import streamlit as st
 import pandas as pd
 import numpy as np
+from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Normalizer
 from sklearn.metrics import classification_report, confusion_matrix
@@ -18,13 +19,13 @@ from models.utils import model_infos, model_urls
 def generate_data():
     data = pd.read_csv('diabetes_data.csv')
     
+    z = np.abs(stats.zscore(data))
+    data = data[(z < 3).all(axis=1)]
+
     X = data.drop('Outcome', axis=1).values
     y = data.Outcome.values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=2)
 
-    normalizer = Normalizer()
-    normalizer.fit(X_train)
-    X_train = normalizer.transform(X_train)
 
     return X_train, X_test, y_train, y_test
 
@@ -98,12 +99,14 @@ def get_ML_model_train_accuracy(model, X_train, y_train):
 
 def plot_NN_accuracy(history):
     acc_line = history.history['accuracy']
+    validation_acc_line = history.history['val_accuracy']
 
     plt.plot(acc_line)
-    plt.title('Model Training Accuracy')
+    plt.plot(validation_acc_line)
+    plt.title('Model Training and Validation Accuracy')
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
-    plt.legend(['train'], loc='upper left')
+    plt.legend(['train', 'test'], loc='upper left')
     return plt
 
 
