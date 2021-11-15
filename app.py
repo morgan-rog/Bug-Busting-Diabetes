@@ -3,12 +3,17 @@ import streamlit as st
 
 from utils.functions import (
     generate_data,
-    train_model,
-    get_model_info,
-    get_model_summary,
+    plot_confusion_matrix,
+    train_NN_model,
+    train_ML_model,
+    get_NN_model_summary,
+    get_ML_model_summary,
+    get_NN_model_accuracy,
+    get_ML_model_accuracy,
+    plot_NN_accuracy,
+    plot_confusion_matrix,
     get_model_url,
-    get_model_accuracy,
-    plot_accuracy,
+    get_model_info,
 )
 
 from utils.ui import (
@@ -29,7 +34,20 @@ def side_bar_controllers():
 
 def body(X_train, X_test, y_train, y_test, model, model_type):
     introduction()
-    (model, history, duration) = train_model(model, X_train, X_test, y_train, y_test)
+    if model_type == "Morgan's model" or model_type == "Simple Neural Network":
+        (model, history, duration) = train_NN_model(model, X_train, X_test, y_train, y_test)
+        model_info = get_model_info(model_type)
+        model_summary = get_NN_model_summary(model)
+        model_url = get_model_url(model_type)
+        model_accuracy = get_NN_model_accuracy(model, X_test, y_test)
+        plt = plot_NN_accuracy(history)
+    else:
+        model, duration = train_ML_model(model, X_train, X_test, y_train, y_test)
+        model_info = get_model_info(model_type)
+        model_url = get_model_url(model_type)
+        model_summary = get_ML_model_summary(model, X_test, y_test)
+        model_accuracy = get_ML_model_accuracy(model, X_test, y_test)
+        plt = plot_confusion_matrix(model, X_test, y_test)
 
     col1, col2 = st.columns((1,1))
 
@@ -42,13 +60,6 @@ def body(X_train, X_test, y_train, y_test, model, model_type):
         info_placeholder = st.empty()
         model_url_placeholder = st.empty()
         summary_placeholder = st.empty()
-
-    model_info = get_model_info(model_type)
-    model_summary = get_model_summary(model)
-    model_url = get_model_url(model_type)
-    model_accuracy = get_model_accuracy(model, X_test, y_test)
-
-    plt = plot_accuracy(model, history)
 
     plot_placeholder.pyplot(fig=plt)
     accuracy_placeholder.info(model_accuracy)
