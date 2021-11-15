@@ -11,11 +11,18 @@ model_infos = {
     """,
     "KNN": """
         K Neighbors Classifier (machine learning model):
-        - DESCRIPTION HERE
+        - The K-nearest neighbors algorithm is a non-parametric classification method
+        and is used for classification and regression.
+        - We chose 2 for the value of n_neighbors when we create the K Neighbors Classifier.
     """,
     "SVM": """
         Support Vector Machine (machine learning model):
-        - DESCRIPTION HERE
+        - Support Vector Machines are machine learning models that analyze data for classification
+        and regression analysis.
+        - The SVM takes the set of training values from the diabetes dataset with 2 classifications
+        (0 for no diabetes, 1 for diabetes) and assigns new examples to one category or the other.
+        SVM maps training examples to points in space so it can maximize the width of the gap between
+        the two categories. 
     """,
 }
 

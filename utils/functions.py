@@ -59,7 +59,7 @@ def get_ML_model_summary(model, X_test, y_test):
     prediction = model.predict(X_test)
     class_report = classification_report(y_test, prediction, output_dict=True)
     summary = "Classification Report:\n\n"
-    summary +=   "precision " + "recall " + "f1-score " + "support\n\n"
+    summary +=   space + "precision " + space + "recall " + space + "f1-score " + space + "support\n\n"
     for label_dict in class_report:
         if label_dict == "accuracy":
             continue
@@ -67,7 +67,7 @@ def get_ML_model_summary(model, X_test, y_test):
         for key in class_report[label_dict]:
             val = round(class_report[label_dict][key], 2)
             val = str(val)
-            summary += val
+            summary += val + space
         summary += "\n\n"
 
     return summary
