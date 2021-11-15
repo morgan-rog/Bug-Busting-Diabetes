@@ -3,6 +3,7 @@ import streamlit as st
 
 from utils.functions import (
     generate_data,
+    plot_ROC_curve,
     plot_confusion_matrix,
     train_NN_model,
     train_ML_model,
@@ -13,6 +14,7 @@ from utils.functions import (
     get_ML_model_test_accuracy,
     get_ML_model_train_accuracy,
     plot_NN_accuracy,
+    plot_ROC_curve,
     plot_confusion_matrix,
     get_model_url,
     get_model_info,
@@ -44,7 +46,15 @@ def body(X_train, X_test, y_train, y_test, model, model_type):
         model_test_accuracy = get_NN_model_test_accuracy(model, X_test, y_test)
         model_train_accuracy = get_NN_model_train_accuracy(model, X_train, y_train)
         plt = plot_NN_accuracy(history)
-    else:
+    elif model_type == "KNN":
+        model, duration = train_ML_model(model, X_train, X_test, y_train, y_test)
+        model_info = get_model_info(model_type)
+        model_url = get_model_url(model_type)
+        model_summary = get_ML_model_summary(model, X_test, y_test)
+        model_test_accuracy = get_ML_model_test_accuracy(model, X_test, y_test)
+        model_train_accuracy = get_ML_model_train_accuracy(model, X_train, y_train)
+        plt = plot_ROC_curve(model, X_test, y_test)
+    elif model_type == "SVM":
         model, duration = train_ML_model(model, X_train, X_test, y_train, y_test)
         model_info = get_model_info(model_type)
         model_url = get_model_url(model_type)
@@ -73,7 +83,7 @@ def body(X_train, X_test, y_train, y_test, model, model_type):
     duration_placeholder.warning(f"Training took {duration:.3f} seconds")
     model_url_placeholder.markdown(model_url)
     info_placeholder.info(model_info)
-    summary_placeholder.info(model_summary)
+    summary_placeholder.markdown(model_summary)
 
 
 if __name__ == "__main__":

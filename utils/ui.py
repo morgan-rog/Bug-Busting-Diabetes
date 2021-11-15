@@ -9,8 +9,11 @@ from models.SVM import svm_param_selector
 
 def introduction():
     st.title("**Welcome to Bug Busting Diabetes**")
+    st.subheader("By The Bug Busters")
     st.markdown(
         """
+        ---
+
         This is a place where you can experiment with different Neural Network models on
         the Pima Indians Diabetes Dataset from Kaggle.
 
@@ -18,10 +21,11 @@ def introduction():
         originally from the National Institute of Diabetes and Kidney Diseases. The objective of the dataset
         is to diagnostically predict whether or not a patient has diabetes.
 
-        The training accuracy is plotted for the Neural Network models and the confusion matrix is plotted for
-        the Machine Learning models.
+        The training accuracy is plotted for the Neural Network models and the [Receiver Operating Characteristic](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)
+        is plotted for the KNN machine learning model and the confusion matrix is plotted for the SVM machine
+        learning model.
 
-        The accuracy of the models are from their predictions on the testing data.
+        The accuracy of the models are from their predictions on the training and testing data.
         
         """
 

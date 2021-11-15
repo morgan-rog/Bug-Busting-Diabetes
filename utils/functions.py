@@ -6,8 +6,8 @@ import numpy as np
 from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Normalizer
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+from sklearn.metrics import precision_score, recall_score
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -58,18 +58,10 @@ def get_ML_model_summary(model, X_test, y_test):
     space = "            "
     prediction = model.predict(X_test)
     class_report = classification_report(y_test, prediction, output_dict=True)
-    summary = "Classification Report:\n\n"
-    summary +=   space + "precision " + space + "recall " + space + "f1-score " + space + "support\n\n"
-    for label_dict in class_report:
-        if label_dict == "accuracy":
-            continue
-        summary += label_dict + ":"
-        for key in class_report[label_dict]:
-            val = round(class_report[label_dict][key], 2)
-            val = str(val)
-            summary += val + space
-        summary += "\n\n"
-
+    summary = "# Precision and Recall:\n\n"
+    summary += "## Precision: " + str(precision_score(y_test, prediction).round(2)*100) + "%\n\n"
+    summary += "## Recall: " + str(recall_score(y_test, prediction).round(2)*100) + "%\n\n"
+    
     return summary
 
 
@@ -115,6 +107,23 @@ def plot_confusion_matrix(model, X_test, y_test):
     conf_matrix = confusion_matrix(y_test, prediction)
     sns.set(font_scale=1.4)
     sns.heatmap(conf_matrix, annot=True, annot_kws={"size": 16})
+    return plt
+
+
+def plot_ROC_curve(model, X_test, y_test):
+    probs = model.predict_proba(X_test)
+    preds = probs[:,1]
+    fpr, tpr, threshold = roc_curve(y_test, preds)
+    roc_auc = auc(fpr, tpr)
+
+    plt.title('Receiver Operating Characteristic')
+    plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+    plt.legend(loc = 'lower right')
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.xlim([0, 1])
+    plt.ylim([0, 1])
+    plt.ylabel('True Positive Rate')
+    plt.xlabel('False Positive Rate')
     return plt
 
 
