@@ -2,6 +2,7 @@ import numpy as np
 import streamlit as st
 
 from models.BugBustersNN import bbnn_param_selector
+from models.BugBustersTesting import bbtesting_param_selector
 from models.SimpleNeuralNetwork import snn_param_selector
 from models.KNN import knn_param_selector
 from models.SVM import svm_param_selector
@@ -39,6 +40,7 @@ def model_selector():
             "Choose a model",
             (
                 "Bug Buster's Neural Network",
+                "Bug Buster's Testing Network",
                 "Simple Neural Network",
                 "KNN",
                 "SVM",
@@ -47,6 +49,9 @@ def model_selector():
 
         if model_type == "Bug Buster's Neural Network":
             model = bbnn_param_selector()
+
+        if model_type == "Bug Buster's Testing Network":
+            model = bbtesting_param_selector()
 
         if model_type == "Simple Neural Network":
             model = snn_param_selector()

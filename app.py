@@ -38,7 +38,8 @@ def side_bar_controllers():
 
 def body(X_train, X_test, y_train, y_test, model, model_type):
     introduction()
-    if model_type == "Bug Buster's Neural Network" or model_type == "Simple Neural Network":
+    neural_network_models = ["Bug Buster's Neural Network", "Bug Buster's Testing Network", "Simple Neural Network"]
+    if model_type in neural_network_models:
         (model, history, duration) = train_NN_model(model, X_train, X_test, y_train, y_test)
         model_info = get_model_info(model_type)
         model_summary = get_NN_model_summary(model)

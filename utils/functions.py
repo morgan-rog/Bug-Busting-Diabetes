@@ -1,5 +1,7 @@
 import time
 
+from keras import callbacks
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -8,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Normalizer
 from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
 from sklearn.metrics import precision_score, recall_score
+from keras.callbacks import EarlyStopping
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -31,9 +34,10 @@ def generate_data():
 
 
 def train_NN_model(model, X_train, X_test, y_train, y_test):
+    callback = EarlyStopping(monitor='loss', patience=3)
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     t0 = time.time()
-    history = model.fit(X_train, y_train, epochs=50, validation_data=(X_test, y_test), verbose=0)
+    history = model.fit(X_train, y_train, epochs=50, validation_data=(X_test, y_test), verbose=0, callbacks=[callback])
     duration = time.time() - t0
     return model, history, duration
 
@@ -50,7 +54,7 @@ def get_NN_model_summary(model):
     model.summary(print_fn=lambda x: summary_list.append(x))
     join_summary = "\n".join(summary_list[3:])
     
-    summary = "Summary of model:\n" + join_summary
+    summary = "Summary of the model:\n" + join_summary
     return summary
 
 
