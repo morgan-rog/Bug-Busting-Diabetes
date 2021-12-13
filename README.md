@@ -1,6 +1,8 @@
 # bugbustingdiabetes
 ## Check out the app ---> click [here](https://share.streamlit.io/morgan-rog/bugbustingdiabetes/main/app.py)
+## Project Report ---> click [here](https://docs.google.com/document/d/1Vc6Sm0uFbJ8D__m8TGhjX40qyB51ckwWYWP80EVqVXE/edit?usp=sharing)
 ### Inspiration for [streamlit](https://streamlit.io/) app layout from [playground](https://github.com/ahmedbesbes/playground/tree/d0617ea8f5f9782583104b6987b813c5163b0d38) by Ahmed Besbes
+
 
 ```
 Type 2 diabetes (T2D) mellitus is a metabolic disorder that occurs in 
